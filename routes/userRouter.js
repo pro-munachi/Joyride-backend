@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const asyncHandler = require('express-async-handler')
+
 const User = require('../models/userModel')
 const Role = require('../models/roleModel')
 
@@ -53,7 +55,7 @@ router.post('/register', async (req, res) => {
 
 // Login users
 
-router.post('/login', async (req, res) => {
+/*router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body
 
@@ -85,9 +87,31 @@ router.post('/login', async (req, res) => {
       },
     })
   } catch (err) {
-    res.json({ error: err.message, hasError: true })
+    res.json({ error: err, hasError: true })
   }
-})
+})*/
+
+router.post(
+  '/login',
+  asyncHandler(async (req, res) => {
+    const { email, password } = req.body
+
+    const user = await User.findOne({ email })
+
+    if (user && (await user.matchPassword(password))) {
+      res.json({
+        _id: user._id,
+        displayName: user.displayName,
+        email: user.email,
+        roles: user.roles,
+        token: generateToken(user._id),
+      })
+    } else {
+      res.status(401)
+      throw new Error('Invalid email or password')
+    }
+  })
+)
 
 //fetch users
 
