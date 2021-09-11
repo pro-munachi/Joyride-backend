@@ -105,10 +105,13 @@ router.post(
         email: user.email,
         roles: user.roles,
         token: generateToken(user._id),
+        hasError: false,
       })
     } else {
-      res.status(401)
-      throw new Error('Invalid email or password')
+      res.status(401).json({
+        error: 'Invalid email or password',
+        hasError: true,
+      })
     }
   })
 )
