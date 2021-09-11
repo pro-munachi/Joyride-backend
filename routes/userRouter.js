@@ -108,7 +108,7 @@ router.post(
         hasError: false,
       })
     } else {
-      res.status(401).json({
+      res.json({
         error: 'Invalid email or password',
         hasError: true,
       })
