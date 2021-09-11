@@ -1,8 +1,8 @@
 const router = require('express').Router()
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
 
+const generateToken = require('../utils/generatetoken')
 const User = require('../models/userModel')
 const Role = require('../models/roleModel')
 
