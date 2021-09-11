@@ -85,7 +85,7 @@ router.post('/login', async (req, res) => {
       },
     })
   } catch (err) {
-    res.status(500).json({ error: err.message, hasError: true })
+    res.json({ error: err.message, hasError: true })
   }
 })
 
