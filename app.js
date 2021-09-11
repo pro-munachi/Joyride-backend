@@ -8,11 +8,7 @@ require('dotenv').config()
 const app = express()
 
 app.use(express.json())
-app.use(
-  cors({
-    origin: '*',
-  })
-)
+app.use(cors())
 
 const PORT = process.env.PORT || 5000
 
@@ -31,4 +27,4 @@ mongoose.connect(
 
 // setup routes
 
-app.use('/users', require('./routes/userRouter'))
+app.use('/users', cors(), require('./routes/userRouter'))
