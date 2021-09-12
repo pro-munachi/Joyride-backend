@@ -8,11 +8,11 @@ const Role = require('../models/roleModel');
 
 //Register users
 
-router.post('/register', async (req, res) => {
-  try {
-    let { email, password, passwordCheck, displayName, roles } = req.body;
-
-    // validate
+router.post(
+  '/register',
+  asyncHandler(async (req, res) => {
+    let { email, password, passwordCheck, displayName, roles, profilePic } =
+      req.body;
 
     if (!email || !password || !passwordCheck) {
       res.status(400).json({ msg: 'Not all fields have been filled' });
@@ -28,11 +28,6 @@ router.post('/register', async (req, res) => {
       res.status(400).json({ msg: 'Enter the same password twice ' });
     }
 
-    const existingUser = await User.findOne({ email: email });
-    if (existingUser) {
-      res.status(400).json({ msg: 'An account with this user already exist ' });
-    }
-
     if (!displayName) {
       displayName = email;
     }
@@ -40,56 +35,39 @@ router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
-    const newUser = new User({
-      email,
-      password: passwordHash,
+    const userExists = await User.findOne({ email });
+
+    if (userExists) {
+      res.status(400);
+      throw new Error('User already exists');
+    }
+
+    const user = await User.create({
+      profilePic,
       displayName,
+      email,
+      password,
       roles,
+      passwordCheck,
     });
-    const savedUser = await newUser.save();
-    res.json(savedUser);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
 
-// Login users
-
-/*router.post('/login', async (req, res) => {
-  try {
-    const { email, password } = req.body
-
-    // validate
-
-    if (!email || !password) {
-      res.status(400).json({ msg: 'An account with this user already exist ' })
-    }
-
-    const user = await User.findOne({ email: email })
-    if (!user) {
-      res.status(400).json({ msg: 'invalid email ' })
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password)
-    if (!isMatch) {
-      res.status(400).json({ msg: 'invalid credentials' })
-    }
-
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET)
-    res.json({
-      token,
-      user: {
-        id: user._id,
+    if (user) {
+      res.status(201).json({
+        _id: user._id,
         displayName: user.displayName,
         email: user.email,
+        roles: user.roles,
+        token: generateToken(user._id),
         hasError: false,
-        message: 'login successful',
-      },
-    })
-  } catch (err) {
-    res.json({ error: err, hasError: true })
-  }
-})*/
+      });
+    } else {
+      res.status(400);
+      throw new Error('Invalid user data');
+    }
+  })
+);
+
+// Login
 
 router.post(
   '/login',
