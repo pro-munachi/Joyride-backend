@@ -2,6 +2,7 @@ const router = require('express').Router()
 const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const nodemailer = require('nodemailer')
+const jwt = require('jsonwebtoken')
 
 const generateToken = require('../utils/generatetoken')
 const User = require('../models/userModel')
@@ -227,7 +228,7 @@ router.post(
                                                   password has been generated for you. To reset your password, click the
                                                   following link and follow the instructions.
                                               </p>
-                                              <a href="http://localhost:3000/reset-password/${token}"
+                                              <a href="http://localhost:3000auth/reset-password/${token}"
                                                   style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Reset
                                                   Password</a>
                                           </td>
@@ -277,6 +278,39 @@ router.post(
       res.json({
         message: 'server error',
         hasError: true,
+      })
+    }
+  })
+)
+
+router.post(
+  '/reset',
+  asyncHandler(async (req, res) => {
+    const { token, password, resetPassword } = req.body
+
+    const salt = await bcrypt.genSalt()
+    const passwordHash = await bcrypt.hash(password, salt)
+
+    if (token) {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET)
+      const user = await User.findByIdAndUpdate(decoded.id, {
+        password: passwordHash,
+      })
+
+      if (user) {
+        res.json({
+          hasError: false,
+          user: user,
+        })
+      } else {
+        res.json({
+          hasError: true,
+          message: 'update failed',
+        })
+      }
+    } else {
+      res.json({
+        error: 'error',
       })
     }
   })
