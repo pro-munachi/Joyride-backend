@@ -40,7 +40,7 @@ router.post(
     if (userExists) {
       res.json({
         hasError: true,
-        message: 'Server error',
+        message: 'user already exist',
       })
     }
 
