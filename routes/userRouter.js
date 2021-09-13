@@ -310,7 +310,8 @@ router.post(
       }
     } else {
       res.json({
-        error: 'error',
+        hasError: true,
+        message: 'update failed',
       })
     }
   })
