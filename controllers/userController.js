@@ -104,7 +104,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
 })
 
 // desc fetch user by id
-// route GET /api/users/:id
+// route GET /api/users/:userId
 
 const getUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.userId)
@@ -202,7 +202,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
 const resetPassword = asyncHandler(async (req, res) => {
   const { token, password, resetPassword } = req.body
 
-  const salt = await bcrypt.genSalt()
+  const salt = await bcrypt.genSalt(10)
   const passwordHash = await bcrypt.hash(password, salt)
 
   if (token) {
@@ -230,6 +230,42 @@ const resetPassword = asyncHandler(async (req, res) => {
   }
 })
 
+// Desc Change Password
+// Route POST api/users/change
+
+const changePassword = asyncHandler(async (req, res) => {
+  const { password, newPassword } = req.body
+
+  const user = await User.findById(req.user._id)
+
+  // console.log(passwordHash)
+  // console.log(user.password)
+
+  let match = await user.matchPassword(password)
+
+  if (match) {
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(newPassword, salt)
+
+    const updatedPassword = await User.findByIdAndUpdate(user._id, {
+      password: hashedPassword,
+    })
+
+    const changedPassword = await updatedPassword.save()
+
+    res.json({
+      changedPassword,
+      message: 'password changed successfully',
+      hasError: 'false',
+    })
+  } else {
+    res.json({
+      hasError: true,
+      message: 'incorrect password',
+    })
+  }
+})
+
 module.exports = {
   registerUser,
   loginUser,
@@ -239,4 +275,5 @@ module.exports = {
   postRole,
   forgotPassword,
   resetPassword,
+  changePassword,
 }

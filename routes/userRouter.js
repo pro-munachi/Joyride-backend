@@ -8,7 +8,9 @@ const {
   postRole,
   forgotPassword,
   resetPassword,
+  changePassword,
 } = require('../controllers/userController')
+const { protect } = require('../middleware/authMiddleware')
 
 router.route('/register').post(registerUser)
 
@@ -25,5 +27,7 @@ router.route('/getRoles').get(getAllRoles)
 router.route('/forgot').post(forgotPassword)
 
 router.route('/reset').post(resetPassword)
+
+router.route('/change').post(protect, changePassword)
 
 module.exports = router
