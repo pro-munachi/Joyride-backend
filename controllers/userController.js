@@ -238,9 +238,6 @@ const changePassword = asyncHandler(async (req, res) => {
 
   const user = await User.findById(req.user._id)
 
-  // console.log(passwordHash)
-  // console.log(user.password)
-
   let match = await user.matchPassword(password)
 
   if (match) {
