@@ -14,24 +14,25 @@ const protect = asyncHandler(async (req, res, next) => {
       token = req.headers.authorization.split(' ')[1]
       console.log(token)
 
-      const decoded = jwt.verify(token, process.env.JWT_SECRET)
-      console.log(decoded)
+      if (token) {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        console.log(decoded)
 
-      req.user = await User.findById(decoded.id)
+        req.user = await User.findById(decoded.id)
 
-      next()
+        next()
+      } else {
+        res.json({
+          hasError: 'Not authorized, no token',
+        })
+        console.log('ewo')
+      }
     } catch (error) {
       console.error(error)
       res.json({
         hasError: 'Not authorized, token failed',
       })
     }
-  }
-
-  if (!token) {
-    res.json({
-      hasError: 'Not authorized, no token',
-    })
   }
 })
 
