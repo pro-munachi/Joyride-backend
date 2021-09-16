@@ -253,7 +253,7 @@ const changePassword = asyncHandler(async (req, res) => {
     res.json({
       changedPassword,
       message: 'password changed successfully',
-      hasError: 'false',
+      hasError: false,
     })
   } else {
     res.json({
