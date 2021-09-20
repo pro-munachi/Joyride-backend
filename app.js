@@ -33,3 +33,4 @@ mongoose.connect(
 // setup routes
 
 app.use('/users', require('./routes/userRouter'))
+app.use('/orders', require('./routes/orderRouter'))
