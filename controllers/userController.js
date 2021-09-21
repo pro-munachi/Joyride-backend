@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 
 const generateToken = require('../utils/generatetoken')
 const User = require('../models/userModel')
-const Role = require('../models/roleModel')
+const Notification = require('../models/notificationModel')
 const { forgotPasswordTemplate } = require('../utils/userUtil')
 
 //@desc    Register user & get token
@@ -53,6 +53,14 @@ const registerUser = asyncHandler(async (req, res) => {
   })
 
   if (user) {
+    const notify = await Notification.create({
+      user: user._id,
+      message: 'your account has been successfully created',
+      isSeen: false,
+    })
+
+    console.log(notify)
+
     res.status(201).json({
       _id: user._id,
       displayName: user.displayName,
@@ -61,6 +69,7 @@ const registerUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
       hasError: false,
       profilePic: user.profilePic,
+      notify,
     })
   } else {
     res.status(400)
