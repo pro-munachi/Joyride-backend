@@ -59,8 +59,6 @@ const registerUser = asyncHandler(async (req, res) => {
       isSeen: false,
     })
 
-    console.log(notify)
-
     res.status(201).json({
       _id: user._id,
       displayName: user.displayName,

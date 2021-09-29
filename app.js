@@ -34,3 +34,4 @@ mongoose.connect(
 
 app.use('/users', require('./routes/userRouter'))
 app.use('/orders', require('./routes/orderRouter'))
+app.use('/notifications', require('./routes/notificationRouter'))
