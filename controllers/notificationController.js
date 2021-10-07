@@ -4,14 +4,13 @@ const nodemailer = require('nodemailer')
 const Notification = require('../models/notificationModel')
 
 // Get all notifications of a single user
-// GET /notifications/getAll
+// GET /notifications/getUser
 
 const getNotify = asyncHandler(async (req, res) => {
-  console.log(req.user._id)
+  const notification = await Notification.find({ user: req.user._id })
 
-  const notify = await Notification.find({ user: req.user._id })
-
-  if (notify) {
+  if (notification) {
+    const notify = notification.reverse()
     res.json({
       hasError: false,
       maessage: 'Notifications fetched successfully',
@@ -48,7 +47,7 @@ const getById = asyncHandler(async (req, res) => {
 })
 
 // Get all notifications of a single user and update all
-// GET /notifications/updateAll
+// GET /notifications/updateUsers
 
 const updateAllUsers = asyncHandler(async (req, res) => {
   const notify = await Notification.find({ user: req.user._id })
