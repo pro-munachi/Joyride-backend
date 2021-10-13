@@ -91,6 +91,7 @@ const loginUser = asyncHandler(async (req, res) => {
       email: user.email,
       roles: user.roles,
       token: generateToken(user._id),
+      isAdmin: user.isAdmin,
       hasError: false,
       profilePic: user.profilePic,
     })
