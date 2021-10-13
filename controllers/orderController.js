@@ -240,6 +240,7 @@ const placeOrder = asyncHandler(async (req, res) => {
         hasError: false,
         message: 'Order has been sent to your email',
         orders,
+        dispatchOrder: orders.dispatchOrder,
         _id: orders._id,
       })
     } else {
@@ -288,9 +289,31 @@ const getById = asyncHandler(async (req, res) => {
   }
 })
 
+// Get order by id and dispatch
+//GET /orders/dispatch/:id
+
+const getByIdAndDispatch = asyncHandler(async (req, res) => {
+  const order = await Order.findByIdAndUpdate(req.params.id, {
+    dispatchOrder: true,
+  })
+
+  const saveOrder = await order.save()
+  if (saveOrder) {
+    res.json({
+      hasError: false,
+      saveOrder,
+    })
+  } else {
+    res.json({
+      hasError: true,
+    })
+  }
+})
+
 module.exports = {
   placeOrder,
   getAll,
   getById,
   getAllById,
+  getByIdAndDispatch,
 }

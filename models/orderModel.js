@@ -10,7 +10,7 @@ const orderSchema = mongoose.Schema(
     orderItems: [
       {
         name: { type: String, required: true },
-        image: { type: String, required: true },
+        image: { type: String, required: false },
         price: { type: Number, required: true },
       },
     ],
@@ -62,6 +62,11 @@ const orderSchema = mongoose.Schema(
     },
     deliveredAt: {
       type: Date,
+    },
+    dispatchOrder: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
   },
   {
