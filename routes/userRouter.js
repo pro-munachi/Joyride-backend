@@ -16,13 +16,13 @@ router.route('/register').post(registerUser)
 
 router.route('/login').post(loginUser)
 
-router.route('/').get(admin, getAllUsers)
+router.route('/').get(protect, admin, getAllUsers)
 
-router.route('/:userId').get(admin, getUserById)
+router.route('/:userId').get(protect, admin, getUserById)
 
-router.route('/roles').post(admin, postRole)
+router.route('/roles').post(protect, admin, postRole)
 
-router.route('/getRoles').get(admin, getAllRoles)
+router.route('/getRoles').get(protect, admin, getAllRoles)
 
 router.route('/forgot').post(forgotPassword)
 
