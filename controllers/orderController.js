@@ -310,10 +310,32 @@ const getByIdAndDispatch = asyncHandler(async (req, res) => {
   }
 })
 
+// Get all orders of a single user
+// GET /orders/getUser
+
+const getUserOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ user: req.user._id })
+
+  if (orders) {
+    const order = orders.reverse()
+    const slice = order.slice(0, 4)
+    res.json({
+      hasError: false,
+      maessage: 'Notifications fetched successfully',
+      slice,
+    })
+  } else {
+    res.json({
+      hasError: true,
+    })
+  }
+})
+
 module.exports = {
   placeOrder,
   getAll,
   getById,
   getAllById,
   getByIdAndDispatch,
+  getUserOrders,
 }
