@@ -321,7 +321,7 @@ const getUserOrders = asyncHandler(async (req, res) => {
     const slice = order.slice(0, 4)
     res.json({
       hasError: false,
-      maessage: 'Notifications fetched successfully',
+      maessage: 'Orders fetched successfully',
       slice,
     })
   } else {
