@@ -314,11 +314,11 @@ const getByIdAndDispatch = asyncHandler(async (req, res) => {
 // GET /orders/getUser
 
 const getUserOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({ user: req.user._id })
+  const orders = await Order.find({ user: req.params.id })
 
   if (orders) {
     const order = orders.reverse()
-    const slice = order.slice(0, 4)
+    const slice = order.slice(0, 5)
     res.json({
       hasError: false,
       maessage: 'Orders fetched successfully',

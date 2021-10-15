@@ -71,6 +71,7 @@ const orderSchema = mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
   }
 )
 
