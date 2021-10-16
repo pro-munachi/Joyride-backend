@@ -9,7 +9,7 @@ const {
 } = require('../controllers/orderController')
 const { protect, admin } = require('../middleware/authMiddleware')
 
-router.route('/').get(protect, getAll)
+router.route('/').get(protect, admin, getAll)
 
 router.route('/getOrders').get(protect, getAllById)
 

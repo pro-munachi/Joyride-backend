@@ -17,15 +17,15 @@ const registerUser = asyncHandler(async (req, res) => {
     req.body
 
   if (!email || !password || !passwordCheck) {
-    res.status(400).json({ msg: 'Not all fields have been filled' })
+    res.json({ msg: 'Not all fields have been filled' })
   }
 
   if (password.length < 5) {
-    res.status(400).json({ msg: 'Password should be 5 characters and above ' })
+    res.json({ msg: 'Password should be 5 characters and above ' })
   }
 
   if (password !== passwordCheck) {
-    res.status(400).json({ msg: 'Enter the same password twice ' })
+    res.json({ msg: 'Enter the same password twice ' })
   }
 
   if (!displayName) {
@@ -271,6 +271,21 @@ const changePassword = asyncHandler(async (req, res) => {
   }
 })
 
+// Desc Delete User
+// Route POST api/users/:id/delete
+
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id)
+
+  if (user) {
+    const deletedUser = await user.remove()
+    res.json({
+      hasError: false,
+      message: 'user deleted successfully',
+    })
+  }
+})
+
 module.exports = {
   registerUser,
   loginUser,
@@ -281,4 +296,5 @@ module.exports = {
   forgotPassword,
   resetPassword,
   changePassword,
+  deleteUser,
 }
