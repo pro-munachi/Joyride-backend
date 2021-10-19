@@ -318,11 +318,11 @@ const getUserOrders = asyncHandler(async (req, res) => {
 
   if (orders) {
     const order = orders.reverse()
-
+    const slice = order.slice(0, 5)
     res.json({
       hasError: false,
       maessage: 'Orders fetched successfully',
-      order,
+      slice,
     })
   } else {
     res.json({
