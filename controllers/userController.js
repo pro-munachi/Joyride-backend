@@ -272,7 +272,7 @@ const changePassword = asyncHandler(async (req, res) => {
 })
 
 // Desc Delete User
-// Route POST api/users/:id/delete
+// Route POST api/users/delete/:id
 
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id)
@@ -282,6 +282,7 @@ const deleteUser = asyncHandler(async (req, res) => {
     res.json({
       hasError: false,
       message: 'user deleted successfully',
+      deletedUser,
     })
   }
 })
