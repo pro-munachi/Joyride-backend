@@ -331,6 +331,26 @@ const getUserOrders = asyncHandler(async (req, res) => {
   }
 })
 
+// Delete an order
+// Delete
+
+const deleteOrder = asyncHandler(async (req, res) => {
+  const orders = await Order.findById(req.params.id)
+
+  if (orders) {
+    const order = await orders.remove()
+    res.json({
+      hasError: false,
+      maessage: 'Orders fetched successfully',
+      order,
+    })
+  } else {
+    res.json({
+      hasError: true,
+    })
+  }
+})
+
 module.exports = {
   placeOrder,
   getAll,
@@ -338,4 +358,5 @@ module.exports = {
   getAllById,
   getByIdAndDispatch,
   getUserOrders,
+  deleteOrder,
 }

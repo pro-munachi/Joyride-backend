@@ -6,6 +6,7 @@ const {
   getAllById,
   getByIdAndDispatch,
   getUserOrders,
+  deleteOrder,
 } = require('../controllers/orderController')
 const { protect, admin } = require('../middleware/authMiddleware')
 
@@ -20,5 +21,7 @@ router.route('/dispatch/:id').get(protect, admin, getByIdAndDispatch)
 router.route('/user/:id').get(protect, getUserOrders)
 
 router.route('/orderProducts').post(protect, placeOrder)
+
+router.route('/delete/:id').delete(protect, admin, deleteOrder)
 
 module.exports = router
