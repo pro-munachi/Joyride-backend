@@ -298,11 +298,9 @@ const adminUser = asyncHandler(async (req, res) => {
   console.log(req.params.id)
 
   if (user) {
-    const savedUser = await user.save()
     res.json({
       hasError: false,
       message: 'User is now an admin',
-      savedUser,
     })
   } else {
     res.json({
