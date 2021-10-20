@@ -269,7 +269,9 @@ const getAll = asyncHandler(async (req, res) => {
 
 const getAllById = asyncHandler(async (req, res) => {
   const orders = await Order.find({ user: req.user._id })
-  res.json({ orders })
+
+  const reverse = orders.reverse()
+  res.json({ reverse, hasError: false, message: 'these are the orders' })
 })
 
 // Get order by id
@@ -310,7 +312,7 @@ const getByIdAndDispatch = asyncHandler(async (req, res) => {
   }
 })
 
-// Get all orders of a single user
+// Get all orders of a single user with params
 // GET /orders/getUser
 
 const getUserOrders = asyncHandler(async (req, res) => {
