@@ -321,7 +321,7 @@ const getUserOrders = asyncHandler(async (req, res) => {
     const slice = order.slice(0, 5)
     res.json({
       hasError: false,
-      maessage: 'Orders fetched successfully',
+      maessage: 'Orders deleted successfully',
       slice,
     })
   } else {

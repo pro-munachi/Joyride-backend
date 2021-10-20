@@ -10,6 +10,7 @@ const {
   resetPassword,
   changePassword,
   deleteUser,
+  adminUser,
 } = require('../controllers/userController')
 const { admin, protect } = require('../middleware/authMiddleware')
 
@@ -20,6 +21,8 @@ router.route('/login').post(loginUser)
 router.route('/').get(protect, admin, getAllUsers)
 
 router.route('/:userId').get(protect, admin, getUserById)
+
+router.route('/admin/:id').get(protect, admin, adminUser)
 
 router.route('/roles').post(protect, admin, postRole)
 

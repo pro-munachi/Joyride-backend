@@ -272,7 +272,7 @@ const changePassword = asyncHandler(async (req, res) => {
 })
 
 // Desc Delete User
-// Route POST api/users/delete/:id
+// Route Get api/users/delete/:id
 
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id)
@@ -283,6 +283,30 @@ const deleteUser = asyncHandler(async (req, res) => {
       hasError: false,
       message: 'user deleted successfully',
       deletedUser,
+    })
+  }
+})
+
+// Desc Update User To Admin
+// Route GET api/users/admin/:id
+
+const adminUser = asyncHandler(async (req, res) => {
+  const user = await User.findByIdAndUpdate(req.params.id, {
+    isAdmin: true,
+  })
+
+  console.log(req.params.id)
+
+  if (user) {
+    const savedUser = await user.save()
+    res.json({
+      hasError: false,
+      message: 'User is now an admin',
+      savedUser,
+    })
+  } else {
+    res.json({
+      hasError: true,
     })
   }
 })
@@ -298,4 +322,5 @@ module.exports = {
   resetPassword,
   changePassword,
   deleteUser,
+  adminUser,
 }
