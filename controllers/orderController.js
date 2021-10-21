@@ -373,7 +373,7 @@ const deleteOrderByUser = asyncHandler(async (req, res) => {
   if (orders) {
     res.json({
       hasError: false,
-      maessage: 'Orders fetched successfully',
+      maessage: 'Orders deleted successfully',
     })
   } else {
     res.json({

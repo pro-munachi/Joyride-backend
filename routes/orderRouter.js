@@ -20,6 +20,8 @@ router.route('/getOrders').get(protect, getAllById)
 
 router.route('/:id').get(protect, getById)
 
+router.route('/user/:id/delete').get(protect, deleteOrderByUser)
+
 router.route('/dispatch/:id').get(protect, admin, getByIdAndDispatch)
 
 router.route('/user/:id').get(protect, getUserOrders)
