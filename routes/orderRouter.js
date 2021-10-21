@@ -7,10 +7,14 @@ const {
   getByIdAndDispatch,
   getUserOrders,
   deleteOrder,
+  getAllDeleted,
+  deleteOrderByUser,
 } = require('../controllers/orderController')
 const { protect, admin } = require('../middleware/authMiddleware')
 
 router.route('/').get(protect, admin, getAll)
+
+router.route('/deleteByUser').get(protect, getAllDeleted)
 
 router.route('/getOrders').get(protect, getAllById)
 

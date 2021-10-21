@@ -68,6 +68,11 @@ const orderSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    isDeleted: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     timestamps: true,

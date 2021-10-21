@@ -264,6 +264,18 @@ const getAll = asyncHandler(async (req, res) => {
   })
 })
 
+// Get all orders
+// GET /orders/
+
+const getAllDeleted = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ user: req.user._id })
+
+  let order = orders.filter((orde) => orde.isDeleted === false)
+  res.json({
+    order,
+  })
+})
+
 // Fetch all orders by user id
 // GET /orders/getOrders
 
@@ -353,6 +365,23 @@ const deleteOrder = asyncHandler(async (req, res) => {
   }
 })
 
+const deleteOrderByUser = asyncHandler(async (req, res) => {
+  const orders = await Order.findByIdAndUpdate(req.params.id, {
+    isDeleted: true,
+  })
+
+  if (orders) {
+    res.json({
+      hasError: false,
+      maessage: 'Orders fetched successfully',
+    })
+  } else {
+    res.json({
+      hasError: true,
+    })
+  }
+})
+
 module.exports = {
   placeOrder,
   getAll,
@@ -361,4 +390,6 @@ module.exports = {
   getByIdAndDispatch,
   getUserOrders,
   deleteOrder,
+  getAllDeleted,
+  deleteOrderByUser,
 }
