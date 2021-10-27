@@ -17,6 +17,7 @@ const placeOrder = asyncHandler(async (req, res) => {
     orderItems,
     shippingPrice,
     taxPrice,
+    totalPrice,
   } = req.body
 
   if (orderItems === [] || orderItems === null || orderItems === undefined) {
@@ -34,6 +35,7 @@ const placeOrder = asyncHandler(async (req, res) => {
       orderItems,
       shippingPrice,
       taxPrice,
+      totalPrice,
     })
 
     if (orders) {
