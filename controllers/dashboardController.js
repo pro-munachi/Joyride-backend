@@ -78,7 +78,7 @@ const todaysOrder = asyncHandler(async (req, res) => {
     user: req.user._id,
     date: moment(new Date()).format('YYYYMMDD'),
   })
-  res.json({ orders, hasError: false })
+  res.json({ orders, long: orders.length, hasError: false })
 })
 
 // Get todays price
