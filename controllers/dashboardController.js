@@ -99,4 +99,278 @@ const todaysPrice = asyncHandler(async (req, res) => {
   }
 })
 
-module.exports = { todaysOrder, todaysPrice, totalPrice }
+// Get orders by month
+// GET /dashboard/chart
+
+const chartOrder = asyncHandler(async (req, res) => {
+  let orders = await Order.find({
+    user: req.user._id,
+  })
+
+  const months = []
+
+  // January
+
+  let jan = []
+  for (let i = 0; i < orders.length; i++) {
+    const date = new Date()
+    let firstDay = moment(new Date(`${date.getFullYear()}-00-1`)).format(
+      'YYYYMMDD'
+    )
+    let lastDay = moment(new Date(`${date.getFullYear()}-01-31`)).format(
+      'YYYYMMDD'
+    )
+    if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
+      jan.push(orders[i].date)
+    }
+  }
+  let january = jan.reduce(function (acc, curr) {
+    return acc + curr.totalPrice
+  }, 0)
+
+  months.push(january)
+
+  // February
+
+  let feb = []
+  for (let i = 0; i < orders.length; i++) {
+    const date = new Date()
+    let firstDay = moment(new Date(`${date.getFullYear()}-02-1`)).format(
+      'YYYYMMDD'
+    )
+
+    let lastDay = moment(new Date(`${date.getFullYear()}-02-31`)).format(
+      'YYYYMMDD'
+    )
+    if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
+      feb.push(orders[i].date)
+    }
+  }
+  let february = feb.reduce(function (acc, curr) {
+    return acc + curr.totalPrice
+  }, 0)
+
+  months.push(february)
+
+  // March
+
+  let mar = []
+  for (let i = 0; i < orders.length; i++) {
+    const date = new Date()
+    let firstDay = moment(new Date(`${date.getFullYear()}-03-1`)).format(
+      'YYYYMMDD'
+    )
+    let lastDay = moment(new Date(`${date.getFullYear()}-03-31`)).format(
+      'YYYYMMDD'
+    )
+    if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
+      mar.push(orders[i].date)
+    }
+  }
+  let march = mar.reduce(function (acc, curr) {
+    return acc + curr.totalPrice
+  }, 0)
+
+  months.push(march)
+
+  // April
+
+  let apr = []
+  for (let i = 0; i < orders.length; i++) {
+    const date = new Date()
+    let firstDay = moment(new Date(`${date.getFullYear()}-04-1`)).format(
+      'YYYYMMDD'
+    )
+    let lastDay = moment(new Date(`${date.getFullYear()}-04-31`)).format(
+      'YYYYMMDD'
+    )
+    if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
+      apr.push(orders[i].date)
+    }
+  }
+  let april = apr.reduce(function (acc, curr) {
+    return acc + curr.totalPrice
+  }, 0)
+
+  months.push(april)
+
+  // May
+
+  let ma = []
+  for (let i = 0; i < orders.length; i++) {
+    const date = new Date()
+    let firstDay = moment(new Date(`${date.getFullYear()}-05-1`)).format(
+      'YYYYMMDD'
+    )
+    let lastDay = moment(new Date(`${date.getFullYear()}-05-31`)).format(
+      'YYYYMMDD'
+    )
+    if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
+      ma.push(orders[i].date)
+    }
+  }
+  let may = ma.reduce(function (acc, curr) {
+    return acc + curr.totalPrice
+  }, 0)
+
+  months.push(may)
+
+  // june
+
+  let jun = []
+  for (let i = 0; i < orders.length; i++) {
+    const date = new Date()
+    let firstDay = moment(new Date(`${date.getFullYear()}-06-1`)).format(
+      'YYYYMMDD'
+    )
+    let lastDay = moment(new Date(`${date.getFullYear()}-06-31`)).format(
+      'YYYYMMDD'
+    )
+    if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
+      jun.push(orders[i].date)
+    }
+  }
+  let june = jun.reduce(function (acc, curr) {
+    return acc + curr.totalPrice
+  }, 0)
+
+  months.push(june)
+
+  //july
+
+  let jul = []
+  for (let i = 0; i < orders.length; i++) {
+    const date = new Date()
+    let firstDay = moment(new Date(`${date.getFullYear()}-07-1`)).format(
+      'YYYYMMDD'
+    )
+    let lastDay = moment(new Date(`${date.getFullYear()}-07-31`)).format(
+      'YYYYMMDD'
+    )
+    if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
+      jul.push(orders[i].date)
+    }
+  }
+  let july = jul.reduce(function (acc, curr) {
+    return acc + curr.totalPrice
+  }, 0)
+
+  months.push(july)
+
+  // august
+
+  let aug = []
+  for (let i = 0; i < orders.length; i++) {
+    const date = new Date()
+    let firstDay = moment(new Date(`${date.getFullYear()}-08-1`)).format(
+      'YYYYMMDD'
+    )
+    let lastDay = moment(new Date(`${date.getFullYear()}-08-31`)).format(
+      'YYYYMMDD'
+    )
+    if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
+      aug.push(orders[i].date)
+    }
+  }
+  let august = aug.reduce(function (acc, curr) {
+    return acc + curr.totalPrice
+  }, 0)
+
+  months.push(august)
+
+  // september
+
+  let sept = []
+
+  for (let i = 0; i < orders.length; i++) {
+    const date = new Date()
+    let firstDay = moment(new Date(`${date.getFullYear()}-09-1`)).format(
+      'YYYYMMDD'
+    )
+
+    let lastDay = moment(new Date(`${date.getFullYear()}-09-31`)).format(
+      'YYYYMMDD'
+    )
+    if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
+      sept.push(orders[i])
+    }
+  }
+  let september = sept.reduce(function (acc, curr) {
+    return acc + curr.totalPrice
+  }, 0)
+
+  months.push(september)
+
+  // october
+
+  let oct = []
+
+  for (let i = 0; i < orders.length; i++) {
+    const date = new Date()
+    let firstDay = moment(new Date(`${date.getFullYear()}-10-1`)).format(
+      'YYYYMMDD'
+    )
+
+    let lastDay = moment(new Date(`${date.getFullYear()}-10-31`)).format(
+      'YYYYMMDD'
+    )
+    if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
+      oct.push(orders[i])
+    }
+  }
+  let october = oct.reduce(function (acc, curr) {
+    return acc + curr.totalPrice
+  }, 0)
+
+  months.push(october)
+
+  // november
+
+  let nov = []
+  for (let i = 0; i < orders.length; i++) {
+    const date = new Date()
+    let firstDay = moment(new Date(`${date.getFullYear()}-11-1`)).format(
+      'YYYYMMDD'
+    )
+    let lastDay = moment(new Date(`${date.getFullYear()}-11-31`)).format(
+      'YYYYMMDD'
+    )
+    if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
+      nov.push(orders[i].date)
+    }
+  }
+  let november = nov.reduce(function (acc, curr) {
+    return acc + curr.totalPrice
+  }, 0)
+
+  months.push(november)
+
+  // december
+
+  let dec = []
+  for (let i = 0; i < orders.length; i++) {
+    const date = new Date()
+    let firstDay = moment(new Date(`${date.getFullYear()}-12-1`)).format(
+      'YYYYMMDD'
+    )
+    let lastDay = moment(new Date(`${date.getFullYear()}-12-31`)).format(
+      'YYYYMMDD'
+    )
+    if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
+      dec.push(orders[i].date)
+    }
+  }
+  let december = dec.reduce(function (acc, curr) {
+    return acc + curr.totalPrice
+  }, 0)
+
+  months.push(december)
+
+  // response
+  res.json({
+    hasError: false,
+    months,
+  })
+})
+
+module.exports = { todaysOrder, todaysPrice, totalPrice, chartOrder }
