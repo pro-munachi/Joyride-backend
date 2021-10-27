@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const moment = require('moment')
 
 const orderSchema = mongoose.Schema(
   {
@@ -54,6 +55,11 @@ const orderSchema = mongoose.Schema(
     },
     paidAt: {
       type: Date,
+    },
+    date: {
+      type: String,
+      required: true,
+      default: moment(new Date()).format('YYYYMMDD'),
     },
     isDelivered: {
       type: Boolean,
