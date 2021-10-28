@@ -112,16 +112,18 @@ const chartOrder = asyncHandler(async (req, res) => {
   // January
 
   let jan = []
+
   for (let i = 0; i < orders.length; i++) {
     const date = new Date()
-    let firstDay = moment(new Date(`${date.getFullYear()}-00-1`)).format(
+    let firstDay = moment(new Date(`${date.getFullYear()}-01-1`)).format(
       'YYYYMMDD'
     )
+
     let lastDay = moment(new Date(`${date.getFullYear()}-01-31`)).format(
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
-      jan.push(orders[i].date)
+      jan.push(orders[i])
     }
   }
   let january = jan.reduce(function (acc, curr) {
@@ -143,7 +145,7 @@ const chartOrder = asyncHandler(async (req, res) => {
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
-      feb.push(orders[i].date)
+      feb.push(orders[i])
     }
   }
   let february = feb.reduce(function (acc, curr) {
@@ -155,16 +157,18 @@ const chartOrder = asyncHandler(async (req, res) => {
   // March
 
   let mar = []
+
   for (let i = 0; i < orders.length; i++) {
     const date = new Date()
     let firstDay = moment(new Date(`${date.getFullYear()}-03-1`)).format(
       'YYYYMMDD'
     )
+
     let lastDay = moment(new Date(`${date.getFullYear()}-03-31`)).format(
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
-      mar.push(orders[i].date)
+      mar.push(orders[i])
     }
   }
   let march = mar.reduce(function (acc, curr) {
@@ -185,7 +189,7 @@ const chartOrder = asyncHandler(async (req, res) => {
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
-      apr.push(orders[i].date)
+      apr.push(orders[i])
     }
   }
   let april = apr.reduce(function (acc, curr) {
@@ -206,7 +210,7 @@ const chartOrder = asyncHandler(async (req, res) => {
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
-      ma.push(orders[i].date)
+      ma.push(orders[i])
     }
   }
   let may = ma.reduce(function (acc, curr) {
@@ -227,7 +231,7 @@ const chartOrder = asyncHandler(async (req, res) => {
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
-      jun.push(orders[i].date)
+      jun.push(orders[i])
     }
   }
   let june = jun.reduce(function (acc, curr) {
@@ -248,7 +252,7 @@ const chartOrder = asyncHandler(async (req, res) => {
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
-      jul.push(orders[i].date)
+      jul.push(orders[i])
     }
   }
   let july = jul.reduce(function (acc, curr) {
@@ -269,7 +273,7 @@ const chartOrder = asyncHandler(async (req, res) => {
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
-      aug.push(orders[i].date)
+      aug.push(orders[i])
     }
   }
   let august = aug.reduce(function (acc, curr) {
@@ -336,7 +340,7 @@ const chartOrder = asyncHandler(async (req, res) => {
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
-      nov.push(orders[i].date)
+      nov.push(orders[i])
     }
   }
   let november = nov.reduce(function (acc, curr) {
@@ -357,7 +361,7 @@ const chartOrder = asyncHandler(async (req, res) => {
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
-      dec.push(orders[i].date)
+      dec.push(orders[i])
     }
   }
   let december = dec.reduce(function (acc, curr) {
@@ -370,6 +374,8 @@ const chartOrder = asyncHandler(async (req, res) => {
   res.json({
     hasError: false,
     months,
+    jan,
+    mar,
   })
 })
 
