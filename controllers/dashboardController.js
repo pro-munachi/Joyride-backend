@@ -6,9 +6,12 @@ const Order = require('../models/orderModel')
 // GET /dashboard/today
 
 const totalPrice = asyncHandler(async (req, res) => {
-  let orders = await Order.find({
-    user: req.user._id,
-  })
+  let orders = await Order.find(
+    {
+      user: req.user._id,
+    },
+    { isDeleted: false }
+  )
 
   if (orders) {
     // Total Order
