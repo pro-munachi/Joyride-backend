@@ -80,6 +80,7 @@ const todaysOrder = asyncHandler(async (req, res) => {
   let orders = await Order.find({
     user: req.user._id,
     date: moment(new Date()).format('YYYYMMDD'),
+    isDeleted: false,
   })
   res.json({ orders, long: orders.length, hasError: false })
 })
@@ -91,6 +92,7 @@ const todaysPrice = asyncHandler(async (req, res) => {
   let orders = await Order.find({
     user: req.user._id,
     date: moment(new Date()).format('YYYYMMDD'),
+    isDeleted: false,
   })
   if (orders) {
     let test = orders.reduce(function (acc, curr) {
@@ -108,6 +110,7 @@ const todaysPrice = asyncHandler(async (req, res) => {
 const chartOrder = asyncHandler(async (req, res) => {
   let orders = await Order.find({
     user: req.user._id,
+    isDeleted: false,
   })
 
   const months = []
