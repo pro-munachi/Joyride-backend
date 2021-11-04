@@ -13,7 +13,7 @@ const { forgotPasswordTemplate } = require('../utils/userUtil')
 //@access  Public
 
 const registerUser = asyncHandler(async (req, res) => {
-  let { email, password, passwordCheck, displayName, roles, profilePic } =
+  let { email, password, passwordCheck, displayName, roles, phoneNumber } =
     req.body
 
   if (!email || !password || !passwordCheck) {
@@ -50,6 +50,7 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password,
     roles,
+    phoneNumber,
   })
 
   if (user) {
@@ -67,6 +68,7 @@ const registerUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
       hasError: false,
       profilePic: user.profilePic,
+      phoneNumber: user.phoneNumber,
       notify,
     })
   } else {

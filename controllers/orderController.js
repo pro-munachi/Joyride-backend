@@ -36,6 +36,8 @@ const placeOrder = asyncHandler(async (req, res) => {
       shippingPrice,
       taxPrice,
       totalPrice,
+      number: req.user.phoneNumber,
+      userName: req.user.displayName,
     })
 
     if (orders) {

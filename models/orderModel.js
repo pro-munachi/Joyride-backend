@@ -8,6 +8,17 @@ const orderSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
+
+    number: {
+      type: String,
+      required: true,
+    },
+
+    userName: {
+      type: String,
+      required: true,
+    },
+
     orderItems: [
       {
         name: { type: String, required: true },
