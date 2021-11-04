@@ -26,7 +26,7 @@ router.route('/dispatch/:id').get(protect, admin, getByIdAndDispatch)
 
 router.route('/user/:id').get(protect, getUserOrders)
 
-router.route('/orderProducts').post(protect, placeOrder)
+router.route('/orderProduct').post(protect, placeOrder)
 
 router.route('/delete/:id').delete(protect, admin, deleteOrder)
 
