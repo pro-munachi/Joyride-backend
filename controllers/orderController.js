@@ -41,7 +41,7 @@ const placeOrder = asyncHandler(async (req, res) => {
     if (orders) {
       const notify = await Notification.create({
         user: req.user._id,
-        message: 'your order/orders has/have been created successfully',
+        message: 'your order/orders has/have been created successfully ',
         isSeen: false,
       })
 
