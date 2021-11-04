@@ -371,6 +371,7 @@ const chartOrder = asyncHandler(async (req, res) => {
   months.push(december)
 
   // response
+
   res.json({
     hasError: false,
     months,
