@@ -16,18 +16,6 @@ const registerUser = asyncHandler(async (req, res) => {
   let { email, password, passwordCheck, displayName, roles, phoneNumber } =
     req.body
 
-  if (!email || !password || !passwordCheck) {
-    res.json({ msg: 'Not all fields have been filled' })
-  }
-
-  if (password.length < 5) {
-    res.json({ msg: 'Password should be 5 characters and above ' })
-  }
-
-  if (password !== passwordCheck) {
-    res.json({ msg: 'Enter the same password twice ' })
-  }
-
   if (!displayName) {
     displayName = email
   }
@@ -45,7 +33,6 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   const user = await User.create({
-    profilePic,
     displayName,
     email,
     password,
@@ -110,7 +97,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
 const getAllUsers = asyncHandler(async (req, res) => {
   const allUsers = await User.find({})
-  res.json(allUsers)
+
+  res.json({ allUsers, hasError: false })
 })
 
 // desc fetch user by id
