@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const path = require('path')
 require('dotenv').config()
 
 //setup express
@@ -36,3 +37,8 @@ app.use('/users', require('./routes/userRouter'))
 app.use('/orders', require('./routes/orderRouter'))
 app.use('/notifications', require('./routes/notificationRouter'))
 app.use('/dashboard', require('./routes/dashboardRouter'))
+
+app.use(express.static(path.join(__dirname, '/build')))
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, 'build/index.html'))
+)
