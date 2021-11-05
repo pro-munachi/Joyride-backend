@@ -369,6 +369,8 @@ const deleteOrder = asyncHandler(async (req, res) => {
   }
 })
 
+// User delete order
+
 const deleteOrderByUser = asyncHandler(async (req, res) => {
   const orders = await Order.findByIdAndUpdate(req.params.id, {
     isDeleted: true,
@@ -378,6 +380,28 @@ const deleteOrderByUser = asyncHandler(async (req, res) => {
     res.json({
       hasError: false,
       maessage: 'Orders deleted successfully',
+    })
+  } else {
+    res.json({
+      hasError: true,
+    })
+  }
+})
+
+// Make an order true by an admin
+
+const makeOrderTrue = asyncHandler(async (req, res) => {
+  const { id, amount } = req.body
+
+  const paid = await Order.findByIdAndUpdate(id, {
+    isPaid: true,
+    totalPrice: amount,
+  })
+
+  if (paid) {
+    res.json({
+      hasError: false,
+      message: 'it has been updated',
     })
   } else {
     res.json({
@@ -396,4 +420,5 @@ module.exports = {
   deleteOrder,
   getAllDeleted,
   deleteOrderByUser,
+  makeOrderTrue,
 }
