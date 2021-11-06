@@ -23,7 +23,7 @@ const orderSchema = mongoose.Schema(
       {
         name: { type: String, required: true },
         image: { type: String, required: false },
-        price: { type: Number, required: true },
+        price: { type: Number, required: false },
       },
     ],
     addressFrom: {
