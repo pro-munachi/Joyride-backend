@@ -9,16 +9,7 @@ const Notification = require('../models/notificationModel')
 // POST /orders/orderProducts
 
 const placeOrder = asyncHandler(async (req, res) => {
-  const {
-    addressFrom,
-    addressTo,
-    paymentMethod,
-    paymentResult,
-    orderItems,
-    shippingPrice,
-    taxPrice,
-    totalPrice,
-  } = req.body
+  const { addressFrom, addressTo, paymentMethod, orderItems } = req.body
 
   if (orderItems === [] || orderItems === null || orderItems === undefined) {
     res.json({
@@ -31,11 +22,7 @@ const placeOrder = asyncHandler(async (req, res) => {
       addressTo,
       user: req.user._id,
       paymentMethod,
-      paymentResult,
       orderItems,
-      shippingPrice,
-      taxPrice,
-      totalPrice,
       number: req.user.phoneNumber,
       userName: req.user.displayName,
     })
