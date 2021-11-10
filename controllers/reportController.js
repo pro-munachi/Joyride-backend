@@ -18,12 +18,16 @@ const getReports = asyncHandler(async (req, res) => {
     for (let i = 0; i < orders.length; i++) {
       if (orders[i].date >= start && orders[i].date <= end) {
         all.push(orders[i])
-        console.log(orders[i].date)
       }
     }
 
+    let total = all.reduce(function (acc, curr) {
+      return acc + curr.totalPrice
+    }, 0)
+
     res.json({
       all,
+      total,
       hasError: false,
     })
   } else {
