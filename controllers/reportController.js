@@ -16,8 +16,9 @@ const getReports = asyncHandler(async (req, res) => {
     const end = moment(new Date(endDate)).format('YYYYMMDD')
 
     for (let i = 0; i < orders.length; i++) {
-      if (orders[i].date <= end || orders[i].date >= start) {
+      if (orders[i].date >= start && orders[i].date <= end) {
         all.push(orders[i])
+        console.log(orders[i].date)
       }
     }
 
