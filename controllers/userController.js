@@ -83,6 +83,7 @@ const loginUser = asyncHandler(async (req, res) => {
       isAdmin: user.isAdmin,
       hasError: false,
       profilePic: user.profilePic,
+      phoneNumber: user.phoneNumber,
     })
   } else {
     res.json({
