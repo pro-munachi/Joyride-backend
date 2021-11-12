@@ -317,7 +317,7 @@ const editUser = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndUpdate(req.user._id, {
     email: email ? email : req.user.email,
     displayName: displayName ? displayName : req.user.displayName,
-    number: number ? number : req.user.number,
+    phoneNumber: number ? number : req.user.phoneNumber,
   })
 
   if (user) {
