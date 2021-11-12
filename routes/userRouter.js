@@ -11,6 +11,8 @@ const {
   changePassword,
   deleteUser,
   adminUser,
+  editUser,
+  changepic,
 } = require('../controllers/userController')
 const { admin, protect } = require('../middleware/authMiddleware')
 
@@ -33,6 +35,10 @@ router.route('/forgot').post(forgotPassword)
 router.route('/reset').post(resetPassword)
 
 router.route('/change').post(protect, changePassword)
+
+router.route('/edit').post(protect, editUser)
+
+router.route('/changepic').post(protect, changepic)
 
 router.route('/delete/:id').delete(protect, admin, deleteUser)
 

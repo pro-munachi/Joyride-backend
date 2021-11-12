@@ -299,6 +299,63 @@ const adminUser = asyncHandler(async (req, res) => {
   }
 })
 
+// Desc Edit Profile
+// Route POST api/users/edit
+
+const editUser = asyncHandler(async (req, res) => {
+  const { displayName, email, number } = req.body
+
+  const userExist = await User.findOne({ email })
+
+  if (userExist) {
+    res.json({
+      hasError: true,
+      message: 'email already exist',
+    })
+  }
+
+  const user = await User.findByIdAndUpdate(req.user._id, {
+    email: email ? email : req.user.email,
+    displayName: displayName ? displayName : req.user.displayName,
+    number: number ? number : req.user.number,
+  })
+
+  if (user) {
+    res.json({
+      hasError: false,
+      message: 'Profile updated successfully',
+    })
+  } else {
+    res.json({
+      hasError: true,
+      message: 'sorry something went wrong',
+    })
+  }
+})
+
+// Desc Change profile pic
+// Desc POST /users/changepic
+
+const changepic = asyncHandler(async (req, res) => {
+  const { profilePic } = req.body
+
+  const user = await User.findByIdAndUpdate(req.user._id, {
+    profilePic: profilePic,
+  })
+
+  if (user) {
+    res.json({
+      hasError: false,
+      message: 'Profile Picture has been updated',
+    })
+  } else {
+    res.json({
+      hasError: true,
+      message: 'sorry something went wrong',
+    })
+  }
+})
+
 module.exports = {
   registerUser,
   loginUser,
@@ -311,4 +368,6 @@ module.exports = {
   changePassword,
   deleteUser,
   adminUser,
+  editUser,
+  changepic,
 }
