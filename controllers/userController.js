@@ -70,10 +70,6 @@ const registerUser = asyncHandler(async (req, res) => {
       if (err) console.log(err)
       else console.log(info)
     })
-    res.send({
-      hasError: false,
-      message: 'Account created successfully',
-    })
 
     res.status(201).json({
       _id: user._id,
