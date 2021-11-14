@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const generateToken = require('../utils/generatetoken')
 const User = require('../models/userModel')
 const Notification = require('../models/notificationModel')
-const { forgotPasswordTemplate } = require('../utils/userUtil')
+const { forgotPasswordTemplate, createdUser } = require('../utils/userUtil')
 
 //@desc    Register user & get token
 //@route   POST /api/users/register
@@ -45,6 +45,34 @@ const registerUser = asyncHandler(async (req, res) => {
       user: user._id,
       message: 'your account has been successfully created',
       isSeen: false,
+    })
+
+    var transporter = nodemailer.createTransport({
+      host: 'mail.midraconsulting.com',
+      port: 8889,
+      secure: false, // upgrade later with STARTTLS
+      auth: {
+        user: 'bobby@midraconsulting.com',
+        pass: '1nt3n@t10n@l',
+      },
+    })
+
+    let data = createdUser(user.displayName)
+
+    const mailOptions = {
+      from: 'bobby@midraconsulting.com', // sender address
+      to: user.email, // list of receivers
+      subject: 'Created an account', // Subject line
+      html: data, // plain text body
+    }
+
+    transporter.sendMail(mailOptions, function (err, info) {
+      if (err) console.log(err)
+      else console.log(info)
+    })
+    res.send({
+      hasError: false,
+      message: 'Account created successfully',
     })
 
     res.status(201).json({
