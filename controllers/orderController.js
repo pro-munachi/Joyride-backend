@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer')
 
 const create = require('../utils/userUtil')
 const Order = require('../models/orderModel')
+const User = require('../models/userModel')
 const Notification = require('../models/notificationModel')
 
 // Order for a product
@@ -33,6 +34,16 @@ const placeOrder = asyncHandler(async (req, res) => {
         message: 'your order/orders has/have been created successfully ',
         isSeen: false,
       })
+
+      const user = await User.find({ isAdmin: true })
+
+      for (let i = 0; i < user.length; i++) {
+        await Notification.create({
+          user: user[i]._id,
+          message: `${req.user.displayName} created an order`,
+          isSeen: false,
+        })
+      }
 
       var transporter = nodemailer.createTransport({
         host: 'mail.midraconsulting.com',
