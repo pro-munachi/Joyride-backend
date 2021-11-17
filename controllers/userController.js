@@ -372,6 +372,7 @@ const changepic = asyncHandler(async (req, res) => {
     res.json({
       hasError: false,
       message: 'Profile Picture has been updated',
+      pic: user.profilePic,
     })
   } else {
     res.json({
