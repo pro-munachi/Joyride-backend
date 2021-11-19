@@ -397,6 +397,18 @@ const makeOrderTrue = asyncHandler(async (req, res) => {
   })
 
   if (paid) {
+    const order = await Order.findById(id)
+
+    let use = order.user
+
+    console.log(use)
+
+    await Notification.create({
+      user: use,
+      message: 'Your order has been confirmed',
+      isSeen: false,
+    })
+
     res.json({
       hasError: false,
       message: 'it has been updated',

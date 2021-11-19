@@ -48,6 +48,7 @@ app.use('/users', require('./routes/userRouter'))
 app.use('/orders', require('./routes/orderRouter'))
 app.use('/notifications', require('./routes/notificationRouter'))
 app.use('/dashboard', require('./routes/dashboardRouter'))
+app.use('/dispatch', require('./routes/dispatchRouter'))
 app.use('/admin', require('./routes/reportRouter'))
 
 app.use(express.static(path.join(__dirname, '/build')))
