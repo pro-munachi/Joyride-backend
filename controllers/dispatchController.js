@@ -113,6 +113,5 @@ module.exports = {
   remove,
   activeDispatchers,
   inactiveDispatchers,
-  remove,
   reactivate,
 }
