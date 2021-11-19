@@ -19,9 +19,9 @@ router.route('/delete/:id').get(protect, admin, remove)
 
 router.route('/reactivate/:id').get(protect, admin, reactivate)
 
-router.route('/active/:id').get(protect, admin, activeDispatchers)
+router.route('/active').get(protect, admin, activeDispatchers)
 
-router.route('/inactive/:id').get(protect, admin, inactiveDispatchers)
+router.route('/inactive').get(protect, admin, inactiveDispatchers)
 
 router.route('/create').post(protect, admin, create)
 
