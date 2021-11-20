@@ -106,6 +106,28 @@ const inactiveDispatchers = asyncHandler(async (req, res) => {
   }
 })
 
+const searchActiveDispatchers = asyncHandler(async (req, res) => {
+  const { id } = req.body
+  const dispatcher = await Dispatch.find({ isDeleted: false, idNumber: id })
+  if (dispatcher) {
+    res.json({
+      hasError: false,
+      dispatcher,
+    })
+  }
+})
+
+const searchInactiveDispatchers = asyncHandler(async (req, res) => {
+  const { id } = req.body
+  const dispatcher = await Dispatch.find({ isDeleted: true, idNumber: id })
+  if (dispatcher) {
+    res.json({
+      hasError: false,
+      dispatcher,
+    })
+  }
+})
+
 module.exports = {
   create,
   getDispatchers,
@@ -114,4 +136,6 @@ module.exports = {
   activeDispatchers,
   inactiveDispatchers,
   reactivate,
+  searchActiveDispatchers,
+  searchInactiveDispatchers,
 }
