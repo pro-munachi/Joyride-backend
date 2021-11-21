@@ -32,6 +32,15 @@ const registerUser = asyncHandler(async (req, res) => {
     })
   }
 
+  const number = await User.findOne({ phoneNumber })
+
+  if (number) {
+    res.json({
+      hasError: true,
+      message: 'Number already exist',
+    })
+  }
+
   const user = await User.create({
     displayName,
     email,

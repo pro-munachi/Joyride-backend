@@ -8,6 +8,24 @@ const create = asyncHandler(async (req, res) => {
 
   const dispatchers = await Dispatch.find({})
 
+  const bike = await Dispatch.findOne({ bikeNumber: bikeNumber })
+
+  if (bike) {
+    res.json({
+      hasError: true,
+      message: 'bike number already exist',
+    })
+  }
+
+  const phone = await Dispatch.findOne({ phoneNumber: phoneNumber })
+
+  if (bike) {
+    res.json({
+      hasError: true,
+      message: 'Phone number already exist',
+    })
+  }
+
   if (
     dispatchers.length === 0 ||
     dispatchers === null ||
@@ -17,7 +35,7 @@ const create = asyncHandler(async (req, res) => {
       bikeNumber,
       displayName,
       phoneNumber,
-      idNumber: '01',
+      idNumber: 'DIS01',
     })
 
     if (dispatcher) {
@@ -28,13 +46,15 @@ const create = asyncHandler(async (req, res) => {
   } else {
     let dis = dispatchers[dispatchers.length - 1]
 
-    let num = (parseInt(parseInt(dis.idNumber), 10) + 101).toString().substr(1)
+    let slice = dis.idNumber.slice(4, 5)
+
+    let num = (parseInt(parseInt(slice), 10) + 101).toString().substr(1)
 
     const dispatcher = await Dispatch.create({
       bikeNumber,
       displayName,
       phoneNumber,
-      idNumber: num,
+      idNumber: `DIS${num}`,
     })
 
     if (dispatcher) {
