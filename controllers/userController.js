@@ -339,15 +339,6 @@ const adminUser = asyncHandler(async (req, res) => {
 const editUser = asyncHandler(async (req, res) => {
   const { displayName, email, number } = req.body
 
-  const userExist = await User.findOne({ email })
-
-  if (userExist) {
-    res.json({
-      hasError: true,
-      message: 'email already exist',
-    })
-  }
-
   const user = await User.findByIdAndUpdate(req.user._id, {
     email: email ? email : req.user.email,
     displayName: displayName ? displayName : req.user.displayName,
