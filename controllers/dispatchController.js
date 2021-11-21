@@ -96,7 +96,7 @@ const reactivate = asyncHandler(async (req, res) => {
 })
 
 const remove = asyncHandler(async (req, res) => {
-  const dispatcher = await Dispatch.findByIdAndUpdate(req.params.id)
+  const dispatcher = await Dispatch.findById(req.params.id)
   if (dispatcher) {
     await dispatcher.remove()
     res.json({
