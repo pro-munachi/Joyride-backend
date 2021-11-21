@@ -401,8 +401,6 @@ const makeOrderTrue = asyncHandler(async (req, res) => {
 
     let use = order.user
 
-    console.log(use)
-
     await Notification.create({
       user: use,
       message: 'Your order has been confirmed',
@@ -420,6 +418,41 @@ const makeOrderTrue = asyncHandler(async (req, res) => {
   }
 })
 
+// Dispatch an order by an admin
+
+const dispatchOrder = asyncHandler(async (req, res) => {
+  const { id, amount, dispatcher, dispatcherId } = req.body
+
+  const order = await Order.findByIdAndUpdate(id, {
+    shippingPrice: amount,
+    dispatcher: dispatcher,
+    dispatcherId: dispatcherId,
+    dispatchOrder: true,
+  })
+
+  if (order) {
+    const order = await Order.findById(id)
+
+    let use = order.user
+
+    await Notification.create({
+      user: use,
+      message: 'Your order has been dispatched',
+      isSeen: false,
+    })
+
+    res.json({
+      hasError: false,
+      message: 'order has been confirmed',
+    })
+  } else {
+    res.json({
+      hasError: true,
+      message: 'sorry something went wrong',
+    })
+  }
+})
+
 module.exports = {
   placeOrder,
   getAll,
@@ -431,4 +464,5 @@ module.exports = {
   getAllDeleted,
   deleteOrderByUser,
   makeOrderTrue,
+  dispatchOrder,
 }

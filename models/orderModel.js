@@ -19,6 +19,14 @@ const orderSchema = mongoose.Schema(
       required: true,
     },
 
+    dispatcher: {
+      type: String,
+    },
+
+    dispatcherId: {
+      type: String,
+    },
+
     orderItems: [
       {
         name: { type: String, required: true },
@@ -44,11 +52,7 @@ const orderSchema = mongoose.Schema(
       update_time: { type: String },
       email_address: { type: String },
     },
-    taxPrice: {
-      type: Number,
-      required: true,
-      default: 0.0,
-    },
+
     shippingPrice: {
       type: Number,
       required: true,
@@ -64,27 +68,29 @@ const orderSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+
     paidAt: {
       type: Date,
     },
+
     date: {
       type: String,
       required: true,
       default: moment(new Date()).format('YYYYMMDD'),
     },
+
     isDelivered: {
       type: Boolean,
       required: true,
       default: false,
     },
-    deliveredAt: {
-      type: Date,
-    },
+
     dispatchOrder: {
       type: Boolean,
       required: true,
       default: false,
     },
+
     isDeleted: {
       type: Boolean,
       required: true,
