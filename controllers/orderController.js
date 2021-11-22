@@ -464,8 +464,10 @@ const deliverOrder = asyncHandler(async (req, res) => {
     isDelivered: true,
   })
 
+  console.log(order)
+
   if (order) {
-    const orde = await Order.findById(id)
+    const orde = await Order.findById(req.params.id)
 
     let use = orde.user
 
@@ -478,7 +480,6 @@ const deliverOrder = asyncHandler(async (req, res) => {
     res.json({
       hasError: false,
       message: 'order has been delivered',
-      order,
     })
   } else {
     res.json({
