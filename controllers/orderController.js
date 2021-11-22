@@ -457,6 +457,38 @@ const dispatchOrder = asyncHandler(async (req, res) => {
   }
 })
 
+// Mark an order as delivered
+
+const deliverOrder = asyncHandler(async (req, res) => {
+  const { id } = req.body
+
+  const order = await Order.findByIdAndUpdate(id, {
+    isDelivered: true,
+  })
+
+  if (order) {
+    const order = await Order.findById(id)
+
+    let use = order.user
+
+    await Notification.create({
+      user: use,
+      message: 'Your order has been dispatched',
+      isSeen: false,
+    })
+
+    res.json({
+      hasError: false,
+      message: 'order has been delivered',
+    })
+  } else {
+    res.json({
+      hasError: true,
+      message: 'sorry something went wrong',
+    })
+  }
+})
+
 module.exports = {
   placeOrder,
   getAll,
@@ -469,4 +501,5 @@ module.exports = {
   deleteOrderByUser,
   makeOrderTrue,
   dispatchOrder,
+  deliverOrder,
 }
