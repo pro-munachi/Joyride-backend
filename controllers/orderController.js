@@ -4,7 +4,9 @@ const nodemailer = require('nodemailer')
 const create = require('../utils/userUtil')
 const Order = require('../models/orderModel')
 const User = require('../models/userModel')
+const Dispatch = require('../models/dispatchModel')
 const Notification = require('../models/notificationModel')
+const { findById } = require('../models/orderModel')
 
 // Order for a product
 // POST /orders/orderProducts
@@ -421,11 +423,13 @@ const makeOrderTrue = asyncHandler(async (req, res) => {
 // Dispatch an order by an admin
 
 const dispatchOrder = asyncHandler(async (req, res) => {
-  const { id, amount, dispatcher, dispatcherId } = req.body
+  const { id, amount, dispatcherId } = req.body
+
+  const dispatcher = await Dispatch.findById(dispatcherId)
 
   const order = await Order.findByIdAndUpdate(id, {
     shippingPrice: amount,
-    dispatcher: dispatcher,
+    dispatcher: dispatcher.displayName,
     dispatcherId: dispatcherId,
     dispatchOrder: true,
   })
