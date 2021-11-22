@@ -460,16 +460,14 @@ const dispatchOrder = asyncHandler(async (req, res) => {
 // Mark an order as delivered
 
 const deliverOrder = asyncHandler(async (req, res) => {
-  const { id } = req.body
-
-  const order = await Order.findByIdAndUpdate(id, {
+  const order = await Order.findByIdAndUpdate(req.params.id, {
     isDelivered: true,
   })
 
   if (order) {
-    const order = await Order.findById(id)
+    const orde = await Order.findById(id)
 
-    let use = order.user
+    let use = orde.user
 
     await Notification.create({
       user: use,
@@ -480,6 +478,7 @@ const deliverOrder = asyncHandler(async (req, res) => {
     res.json({
       hasError: false,
       message: 'order has been delivered',
+      order,
     })
   } else {
     res.json({

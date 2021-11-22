@@ -21,13 +21,13 @@ router.route('/deleteByUser').get(protect, getAllDeleted)
 
 router.route('/getOrders').get(protect, getAllById)
 
-router.route('/deliverorder').get(protect, deliverOrder)
-
 router.route('/:id').get(protect, getById)
 
 router.route('/user/:id/delete').get(protect, deleteOrderByUser)
 
 router.route('/dispatch/:id').get(protect, admin, getByIdAndDispatch)
+
+router.route('/deliver/:id').get(protect, admin, deliverOrder)
 
 router.route('/user/:id').get(protect, getUserOrders)
 
