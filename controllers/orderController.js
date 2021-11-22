@@ -471,7 +471,7 @@ const deliverOrder = asyncHandler(async (req, res) => {
 
     await Notification.create({
       user: use,
-      message: 'Your order has been dispatched',
+      message: 'Your order has been delivered',
       isSeen: false,
     })
 
