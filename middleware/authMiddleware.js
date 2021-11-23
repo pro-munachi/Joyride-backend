@@ -13,19 +13,14 @@ const protect = asyncHandler(async (req, res, next) => {
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
-      if (!decoded) {
-        res.json({
-          hasError: true,
-          message: 'token has expired',
-        })
-      }
-
       req.user = await User.findById(decoded.id)
 
       next()
     } catch (error) {
-      res.status(401)
-      throw new Error('Not authorized, token failed')
+      throw res.json({
+        hasError: true,
+        message: 'Not authorized, token failed',
+      })
     }
   }
 
