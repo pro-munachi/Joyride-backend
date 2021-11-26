@@ -25,75 +25,68 @@ const registerUser = asyncHandler(async (req, res) => {
 
   const userExists = await User.findOne({ email })
 
-  if (userExists) {
-    res.json({
-      hasError: true,
-      message: 'user already exist',
-    })
-  }
-
   const number = await User.findOne({ phoneNumber })
 
-  if (number) {
+  if (number || userExists) {
     res.json({
       hasError: true,
-      message: 'Number already exist',
-    })
-  }
-
-  const user = await User.create({
-    displayName,
-    email,
-    password,
-    roles,
-    phoneNumber,
-  })
-
-  if (user) {
-    const notify = await Notification.create({
-      user: user._id,
-      message: 'your account has been successfully created',
-      isSeen: false,
-    })
-
-    var transporter = nodemailer.createTransport({
-      host: 'mail.midraconsulting.com',
-      port: 8889,
-      secure: false, // upgrade later with STARTTLS
-      auth: {
-        user: 'bobby@midraconsulting.com',
-        pass: '1nt3n@t10n@l',
-      },
-    })
-
-    let data = createdUser(user.displayName)
-
-    const mailOptions = {
-      from: 'bobby@midraconsulting.com', // sender address
-      to: user.email, // list of receivers
-      subject: 'Created an account', // Subject line
-      html: data, // plain text body
-    }
-
-    transporter.sendMail(mailOptions, function (err, info) {
-      if (err) console.log(err)
-      else console.log(info)
-    })
-
-    res.status(201).json({
-      _id: user._id,
-      displayName: user.displayName,
-      email: user.email,
-      roles: user.roles,
-      token: generateToken(user._id),
-      hasError: false,
-      profilePic: user.profilePic,
-      phoneNumber: user.phoneNumber,
-      notify,
+      message: 'Email or Number already exist',
     })
   } else {
-    res.status(400)
-    throw new Error('Invalid user data')
+    const user = await User.create({
+      displayName,
+      email,
+      password,
+      roles,
+      phoneNumber,
+    })
+
+    if (user) {
+      const notify = await Notification.create({
+        user: user._id,
+        message: 'your account has been successfully created',
+        isSeen: false,
+      })
+
+      var transporter = nodemailer.createTransport({
+        host: 'mail.midraconsulting.com',
+        port: 8889,
+        secure: false, // upgrade later with STARTTLS
+        auth: {
+          user: 'bobby@midraconsulting.com',
+          pass: '1nt3n@t10n@l',
+        },
+      })
+
+      let data = createdUser(user.displayName)
+
+      const mailOptions = {
+        from: 'bobby@midraconsulting.com', // sender address
+        to: user.email, // list of receivers
+        subject: 'Created an account', // Subject line
+        html: data, // plain text body
+      }
+
+      transporter.sendMail(mailOptions, function (err, info) {
+        if (err) console.log(err)
+        else console.log(info)
+      })
+
+      res.status(201).json({
+        _id: user._id,
+        displayName: user.displayName,
+        email: user.email,
+        roles: user.roles,
+        token: generateToken(user._id),
+        hasError: false,
+        profilePic: user.profilePic,
+        phoneNumber: user.phoneNumber,
+        notify,
+      })
+    } else {
+      res.status(400)
+      throw new Error('Invalid user data')
+    }
   }
 })
 
@@ -339,22 +332,33 @@ const adminUser = asyncHandler(async (req, res) => {
 const editUser = asyncHandler(async (req, res) => {
   const { displayName, email, number } = req.body
 
-  const user = await User.findByIdAndUpdate(req.user._id, {
-    email: email ? email : req.user.email,
-    displayName: displayName ? displayName : req.user.displayName,
-    phoneNumber: number ? number : req.user.phoneNumber,
-  })
+  const userExists = await User.findOne({ email })
 
-  if (user) {
-    res.json({
-      hasError: false,
-      message: 'Profile updated successfully',
-    })
-  } else {
+  const phonenumber = await User.findOne({ phoneNumber: number })
+
+  if (userExists || phonenumber) {
     res.json({
       hasError: true,
-      message: 'sorry something went wrong',
+      message: 'Email or Phone Number already exist',
     })
+  } else {
+    const user = await User.findByIdAndUpdate(req.user._id, {
+      email: email ? email : req.user.email,
+      displayName: displayName ? displayName : req.user.displayName,
+      phoneNumber: number ? number : req.user.phoneNumber,
+    })
+
+    if (user) {
+      res.json({
+        hasError: false,
+        message: 'Profile updated successfully',
+      })
+    } else {
+      res.json({
+        hasError: true,
+        message: 'sorry something went wrong',
+      })
+    }
   }
 })
 

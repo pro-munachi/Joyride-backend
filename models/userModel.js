@@ -20,6 +20,7 @@ const userSchema = mongoose.Schema(
     phoneNumber: {
       type: String,
       required: true,
+      unique: true,
     },
 
     isAdmin: {
