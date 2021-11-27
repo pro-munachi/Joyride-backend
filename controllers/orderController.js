@@ -437,10 +437,9 @@ const dispatchOrder = asyncHandler(async (req, res) => {
   const theOrder = await Order.findById(id)
 
   if (theOrder.shippingPrice !== 0) {
-    console.log('order')
     res.json({
       hasError: true,
-      message: 'Order has already been dispatched',
+      message: 'Order has already been dispatched by an admin',
     })
   } else {
     const dispatcher = await Dispatch.findById(dispatcherId)
@@ -465,7 +464,7 @@ const dispatchOrder = asyncHandler(async (req, res) => {
 
       res.json({
         hasError: false,
-        message: 'order has been confirmed',
+        message: 'order has been Dispatched',
       })
     } else {
       res.json({
