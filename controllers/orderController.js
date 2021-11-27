@@ -434,44 +434,35 @@ const makeOrderTrue = asyncHandler(async (req, res) => {
 const dispatchOrder = asyncHandler(async (req, res) => {
   const { id, amount, dispatcherId } = req.body
 
-  const theOrder = await Order.findById(id)
+  const dispatcher = await Dispatch.findById(dispatcherId)
 
-  if (theOrder.shippingPrice !== 0) {
+  const order = await Order.findByIdAndUpdate(id, {
+    shippingPrice: amount,
+    dispatcher: dispatcher.displayName,
+    dispatcherId: dispatcherId,
+    dispatchOrder: true,
+  })
+
+  if (order) {
+    const order = await Order.findById(id)
+
+    let use = order.user
+
+    await Notification.create({
+      user: use,
+      message: 'Your order has been dispatched',
+      isSeen: false,
+    })
+
     res.json({
-      hasError: true,
-      message: 'Order has already been dispatched by an admin',
+      hasError: false,
+      message: 'order has been Dispatched',
     })
   } else {
-    const dispatcher = await Dispatch.findById(dispatcherId)
-
-    const order = await Order.findByIdAndUpdate(id, {
-      shippingPrice: amount,
-      dispatcher: dispatcher.displayName,
-      dispatcherId: dispatcherId,
-      dispatchOrder: true,
+    res.json({
+      hasError: true,
+      message: 'sorry something went wrong',
     })
-
-    if (order) {
-      const order = await Order.findById(id)
-
-      let use = order.user
-
-      await Notification.create({
-        user: use,
-        message: 'Your order has been dispatched',
-        isSeen: false,
-      })
-
-      res.json({
-        hasError: false,
-        message: 'order has been Dispatched',
-      })
-    } else {
-      res.json({
-        hasError: true,
-        message: 'sorry something went wrong',
-      })
-    }
   }
 })
 
