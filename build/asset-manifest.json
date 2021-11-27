@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/static/css/main.30d1c0cc.chunk.css",
+    "main.js": "/static/js/main.e09f33fc.chunk.js",
+    "main.js.map": "/static/js/main.e09f33fc.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.b38d1ea9.js",
+    "runtime-main.js.map": "/static/js/runtime-main.b38d1ea9.js.map",
+    "static/css/2.0975cee1.chunk.css": "/static/css/2.0975cee1.chunk.css",
+    "static/js/2.b199ff78.chunk.js": "/static/js/2.b199ff78.chunk.js",
+    "static/js/2.b199ff78.chunk.js.map": "/static/js/2.b199ff78.chunk.js.map",
+    "static/js/3.2d90b460.chunk.js": "/static/js/3.2d90b460.chunk.js",
+    "static/js/3.2d90b460.chunk.js.map": "/static/js/3.2d90b460.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.0975cee1.chunk.css.map": "/static/css/2.0975cee1.chunk.css.map",
+    "static/css/main.30d1c0cc.chunk.css.map": "/static/css/main.30d1c0cc.chunk.css.map",
+    "static/js/2.b199ff78.chunk.js.LICENSE.txt": "/static/js/2.b199ff78.chunk.js.LICENSE.txt",
+    "static/media/bobby.ca4686f1.jpg": "/static/media/bobby.ca4686f1.jpg",
+    "static/media/boxcircles.050d5449.svg": "/static/media/boxcircles.050d5449.svg",
+    "static/media/cover.ea19a315.png": "/static/media/cover.ea19a315.png",
+    "static/media/favour.ed7105a0.jpg": "/static/media/favour.ed7105a0.jpg",
+    "static/media/first.f9a3100f.PNG": "/static/media/first.f9a3100f.PNG",
+    "static/media/fourth.7b9b26b5.PNG": "/static/media/fourth.7b9b26b5.PNG",
+    "static/media/signup.css": "/static/media/image 1.b403e4dd.png",
+    "static/media/HomeFooter.css": "/static/media/magic.87152e98.svg",
+    "static/media/muna.ff0127f1.jpg": "/static/media/muna.ff0127f1.jpg",
+    "static/media/second.1a193601.PNG": "/static/media/second.1a193601.PNG",
+    "static/media/third.96de8c31.PNG": "/static/media/third.96de8c31.PNG",
+    "static/media/HomeMiddle.css": "/static/media/wind.c408ee7e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b38d1ea9.js",
+    "static/css/2.0975cee1.chunk.css",
+    "static/js/2.b199ff78.chunk.js",
+    "static/css/main.30d1c0cc.chunk.css",
+    "static/js/main.e09f33fc.chunk.js"
+  ]
+}
