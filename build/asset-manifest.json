@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e787fb5c.chunk.css",
+    "main.js": "/static/js/main.3cb1ff7a.chunk.js",
+    "main.js.map": "/static/js/main.3cb1ff7a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.9af5629f.js",
+    "runtime-main.js.map": "/static/js/runtime-main.9af5629f.js.map",
+    "static/css/2.0975cee1.chunk.css": "/static/css/2.0975cee1.chunk.css",
+    "static/js/2.79e6cd37.chunk.js": "/static/js/2.79e6cd37.chunk.js",
+    "static/js/2.79e6cd37.chunk.js.map": "/static/js/2.79e6cd37.chunk.js.map",
+    "static/js/3.c034e0e7.chunk.js": "/static/js/3.c034e0e7.chunk.js",
+    "static/js/3.c034e0e7.chunk.js.map": "/static/js/3.c034e0e7.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.0975cee1.chunk.css.map": "/static/css/2.0975cee1.chunk.css.map",
+    "static/css/main.e787fb5c.chunk.css.map": "/static/css/main.e787fb5c.chunk.css.map",
+    "static/js/2.79e6cd37.chunk.js.LICENSE.txt": "/static/js/2.79e6cd37.chunk.js.LICENSE.txt",
+    "static/media/bobby.ca4686f1.jpg": "/static/media/bobby.ca4686f1.jpg",
+    "static/media/boxcircles.050d5449.svg": "/static/media/boxcircles.050d5449.svg",
+    "static/media/cover.ea19a315.png": "/static/media/cover.ea19a315.png",
+    "static/media/empty.78ed9a57.svg": "/static/media/empty.78ed9a57.svg",
+    "static/media/favour.ed7105a0.jpg": "/static/media/favour.ed7105a0.jpg",
+    "static/media/first.f9a3100f.PNG": "/static/media/first.f9a3100f.PNG",
+    "static/media/fourth.7b9b26b5.PNG": "/static/media/fourth.7b9b26b5.PNG",
+    "static/media/signup.css": "/static/media/image 1.b403e4dd.png",
+    "static/media/HomeFooter.css": "/static/media/magic.87152e98.svg",
+    "static/media/muna.ff0127f1.jpg": "/static/media/muna.ff0127f1.jpg",
+    "static/media/networkerror.22d520a4.svg": "/static/media/networkerror.22d520a4.svg",
+    "static/media/second.1a193601.PNG": "/static/media/second.1a193601.PNG",
+    "static/media/third.96de8c31.PNG": "/static/media/third.96de8c31.PNG",
+    "static/media/HomeMiddle.css": "/static/media/wind.c408ee7e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9af5629f.js",
+    "static/css/2.0975cee1.chunk.css",
+    "static/js/2.79e6cd37.chunk.js",
+    "static/css/main.e787fb5c.chunk.css",
+    "static/js/main.3cb1ff7a.chunk.js"
+  ]
+}
