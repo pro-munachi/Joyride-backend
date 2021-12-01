@@ -146,9 +146,9 @@ const chartOrder = asyncHandler(async (req, res) => {
       'YYYYMMDD'
     )
 
-    let lastDay = moment(new Date(`${date.getFullYear()}-02-0`)).format(
-      'YYYYMMDD'
-    )
+    let lastDay = moment(
+      new Date(`${date.getFullYear()}-${date.getMonth(february)}-0`)
+    ).format('YYYYMMDD')
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
       feb.push(orders[i])
     }
