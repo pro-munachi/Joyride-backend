@@ -141,13 +141,18 @@ const chartOrder = asyncHandler(async (req, res) => {
   let feb = []
   for (let i = 0; i < orders.length; i++) {
     const date = new Date()
+
+    const mon = date.getMonth()
+
+    const endMonth = moment().endOf(`${mon}`)
+
     let firstDay = moment(new Date(`${date.getFullYear()}-02-1`)).format(
       'YYYYMMDD'
     )
 
-    let lastDay = moment(new Date(`${date.getFullYear()}-02-31`)).format(
-      'YYYYMMDD'
-    )
+    let lastDay = moment(
+      new Date(`${date.getFullYear()}-02-${endMonth}`)
+    ).format('YYYYMMDD')
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
       feb.push(orders[i])
     }
@@ -189,7 +194,7 @@ const chartOrder = asyncHandler(async (req, res) => {
     let firstDay = moment(new Date(`${date.getFullYear()}-04-1`)).format(
       'YYYYMMDD'
     )
-    let lastDay = moment(new Date(`${date.getFullYear()}-04-31`)).format(
+    let lastDay = moment(new Date(`${date.getFullYear()}-04-30`)).format(
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
@@ -231,7 +236,7 @@ const chartOrder = asyncHandler(async (req, res) => {
     let firstDay = moment(new Date(`${date.getFullYear()}-06-1`)).format(
       'YYYYMMDD'
     )
-    let lastDay = moment(new Date(`${date.getFullYear()}-06-31`)).format(
+    let lastDay = moment(new Date(`${date.getFullYear()}-06-30`)).format(
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
@@ -296,7 +301,7 @@ const chartOrder = asyncHandler(async (req, res) => {
       'YYYYMMDD'
     )
 
-    let lastDay = moment(new Date(`${date.getFullYear()}-09-31`)).format(
+    let lastDay = moment(new Date(`${date.getFullYear()}-09-30`)).format(
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {
@@ -340,7 +345,7 @@ const chartOrder = asyncHandler(async (req, res) => {
     let firstDay = moment(new Date(`${date.getFullYear()}-11-1`)).format(
       'YYYYMMDD'
     )
-    let lastDay = moment(new Date(`${date.getFullYear()}-11-31`)).format(
+    let lastDay = moment(new Date(`${date.getFullYear()}-11-30`)).format(
       'YYYYMMDD'
     )
     if (orders[i].date >= firstDay && orders[i].date <= lastDay) {

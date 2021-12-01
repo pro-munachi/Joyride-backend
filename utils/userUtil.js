@@ -50,7 +50,7 @@ const forgotPasswordTemplate = (token) => {
                                                 password has been generated for you. To reset your password, click the
                                                 following link and follow the instructions.
                                             </p>
-                                            <a href="http://localhost:3000/auth/reset-password/${token}"
+                                            <a href="https://joyrideapp.herokuapp.com/auth/reset-password/${token}"
                                                 style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Reset
                                                 Password</a>
                                         </td>
@@ -108,7 +108,7 @@ const createdUser = (user) => {
                         </tr>
                         <tr>
                             <td style="text-align:center;">
-                              <a href="https://rakeshmandal.com" title="logo" target="_blank">
+                              <a href="https://joyrideapp.herokuapp.com" title="logo" target="_blank">
                                 <img width="60" src="https://i.ibb.co/hL4XZp2/android-chrome-192x192.png" title="logo" alt="logo">
                               </a>
                             </td>
@@ -281,7 +281,6 @@ const create = ({ user, items }) => {
       `<table>
                                         <tr>
                                             <p>${item.name}</p>
-                                            <p>${item.price}</p>
                                         </tr>
                                     </table>`
   )}
@@ -309,7 +308,7 @@ const create = ({ user, items }) => {
                             margin: 0 0 0;
                         "
                         >
-                        &copy; <strong>www.rakeshmandal.com</strong>
+                        &copy; <strong>www.joyrideapp.herokuapp.com</strong>
                         </p>
                     </td>
                     </tr>
