@@ -20,7 +20,7 @@ router.route('/suspend/:id').get(protect, admin, suspend)
 
 router.route('/delete/:id').get(protect, admin, remove)
 
-router.route('/:num').get(protect, admin, findByNumber)
+router.route('/id/:num').get(protect, admin, findByNumber)
 
 router.route('/reactivate/:id').get(protect, admin, reactivate)
 
