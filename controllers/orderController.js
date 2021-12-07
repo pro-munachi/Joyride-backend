@@ -435,7 +435,9 @@ const makeOrderTrue = asyncHandler(async (req, res) => {
 const dispatchOrder = asyncHandler(async (req, res) => {
   const { id, amount, dispatcherId } = req.body
 
-  const dispatcher = await Dispatch.findById(dispatcherId)
+  const dispatcher = await Dispatch.findOne({ idNumber: dispatcherId })
+
+  console.log(dispatcher)
 
   const order = await Order.findByIdAndUpdate(id, {
     shippingPrice: amount,
