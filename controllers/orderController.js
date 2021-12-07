@@ -407,16 +407,6 @@ const makeOrderTrue = asyncHandler(async (req, res) => {
       admin: req.user.displayName,
     })
 
-    const admins = await User.findById({ isAdmin: true })
-
-    for (let i = 0; i < admins.length; i++) {
-      await Notification.create({
-        user: admins[i]._id,
-        message: `${req.user.displayName} added price to an order`,
-        isSeen: false,
-      })
-    }
-
     if (paid) {
       const order = await Order.findById(id)
 
@@ -465,16 +455,6 @@ const dispatchOrder = asyncHandler(async (req, res) => {
       message: 'Your order has been dispatched',
       isSeen: false,
     })
-
-    const admins = await User.findById({ isAdmin: true })
-
-    for (let i = 0; i < admins.length; i++) {
-      await Notification.create({
-        user: admins[i]._id,
-        message: `${req.user.displayName} dispatched an order`,
-        isSeen: false,
-      })
-    }
 
     res.json({
       hasError: false,
