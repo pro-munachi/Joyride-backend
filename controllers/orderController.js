@@ -406,6 +406,16 @@ const makeOrderTrue = asyncHandler(async (req, res) => {
       totalPrice: amount,
     })
 
+    const admins = await User.findById({ isAdmin: true })
+
+    for (let i = 0; i < admins.length; i++) {
+      await Notification.create({
+        user: admins[i]._id,
+        message: `${req.user.displayName} added price to an order`,
+        isSeen: false,
+      })
+    }
+
     if (paid) {
       const order = await Order.findById(id)
 
@@ -454,6 +464,16 @@ const dispatchOrder = asyncHandler(async (req, res) => {
       isSeen: false,
     })
 
+    const admins = await User.findById({ isAdmin: true })
+
+    for (let i = 0; i < admins.length; i++) {
+      await Notification.create({
+        user: admins[i]._id,
+        message: `${req.user.displayName} dispatched an order`,
+        isSeen: false,
+      })
+    }
+
     res.json({
       hasError: false,
       message: 'order has been Dispatched',
@@ -497,6 +517,19 @@ const deliverOrder = asyncHandler(async (req, res) => {
   }
 })
 
+// Get all the orders from a dispatcher
+
+const orderDispatcher = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ dispatcherId: req.params.disp })
+
+  if (orders) {
+    res.json({
+      orders,
+      hasError: false,
+    })
+  }
+})
+
 module.exports = {
   placeOrder,
   getAll,
@@ -510,4 +543,5 @@ module.exports = {
   makeOrderTrue,
   dispatchOrder,
   deliverOrder,
+  orderDispatcher,
 }

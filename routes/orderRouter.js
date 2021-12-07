@@ -12,6 +12,7 @@ const {
   makeOrderTrue,
   dispatchOrder,
   deliverOrder,
+  orderDispatcher,
 } = require('../controllers/orderController')
 const { protect, admin } = require('../middleware/authMiddleware')
 
@@ -28,6 +29,8 @@ router.route('/user/:id/delete').get(protect, deleteOrderByUser)
 router.route('/dispatch/:id').get(protect, admin, getByIdAndDispatch)
 
 router.route('/deliver/:id').get(protect, admin, deliverOrder)
+
+router.route('/dispatcher/:disp').get(protect, admin, orderDispatcher)
 
 router.route('/user/:id').get(protect, getUserOrders)
 
