@@ -148,6 +148,23 @@ const searchInactiveDispatchers = asyncHandler(async (req, res) => {
   }
 })
 
+// Find dispatcher by Serial Number
+
+const findByNumber = asyncHandler(async (req, res) => {
+  const dispatcher = await Dispatch.find({ idNumber: req.params.num })
+
+  if (dispatcher) {
+    res.json({
+      hasError: false,
+      dispatcher,
+    })
+  } else {
+    res.json({
+      hasError: true,
+    })
+  }
+})
+
 module.exports = {
   create,
   getDispatchers,
@@ -158,4 +175,5 @@ module.exports = {
   reactivate,
   searchActiveDispatchers,
   searchInactiveDispatchers,
+  findByNumber,
 }

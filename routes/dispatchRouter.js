@@ -10,6 +10,7 @@ const {
   reactivate,
   searchInactiveDispatchers,
   searchActiveDispatchers,
+  findByNumber,
 } = require('../controllers/dispatchController')
 const { protect, admin } = require('../middleware/authMiddleware')
 
@@ -18,6 +19,8 @@ router.route('/').get(protect, admin, getDispatchers)
 router.route('/suspend/:id').get(protect, admin, suspend)
 
 router.route('/delete/:id').get(protect, admin, remove)
+
+router.route('/:num').get(protect, admin, findByNumber)
 
 router.route('/reactivate/:id').get(protect, admin, reactivate)
 
