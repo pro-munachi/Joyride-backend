@@ -404,6 +404,7 @@ const makeOrderTrue = asyncHandler(async (req, res) => {
     const paid = await Order.findByIdAndUpdate(id, {
       isPaid: true,
       totalPrice: amount,
+      admin: req.user.displayName,
     })
 
     const admins = await User.findById({ isAdmin: true })
@@ -451,6 +452,7 @@ const dispatchOrder = asyncHandler(async (req, res) => {
     dispatcher: dispatcher.displayName,
     dispatcherId: dispatcherId,
     dispatchOrder: true,
+    admin: req.user.displayName,
   })
 
   if (order) {
