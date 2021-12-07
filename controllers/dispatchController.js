@@ -154,10 +154,7 @@ const findByNumber = asyncHandler(async (req, res) => {
   const dispatcher = await Dispatch.find({ idNumber: req.params.num })
 
   if (dispatcher) {
-    res.json({
-      hasError: false,
-      dispatcher,
-    })
+    res.json(dispatcher)
   } else {
     res.json({
       hasError: true,
